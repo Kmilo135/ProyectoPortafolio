@@ -116,3 +116,12 @@ C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\bin\Debug
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.dll
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Modelo\obj\Debug\Modelo.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Modelo\obj\Debug\Modelo.pdb

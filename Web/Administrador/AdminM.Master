@@ -31,7 +31,6 @@
         <ul class="dropdown-menu">
           <li><a href="../Administrador/WebVerUsuarios.aspx">Ver Usuarios</a></li>
           <li><a href="../Administrador/WebRegistroAdmin.aspx">Registrar Usuario</a></li>
-          <li><a href="../Administrador/WebEditarUsuario.aspx">Editar Usuarios</a></li>
         </ul>
       </li>
       <li class="dropdown">

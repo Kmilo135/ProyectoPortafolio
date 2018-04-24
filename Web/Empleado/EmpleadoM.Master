@@ -64,16 +64,15 @@
 <!--        FIN DE CONTENIDO		-->
 
 <!--        INICIO FOOTER        -->
-
-<!--        INICIO FOOTER        -->
 <footer>
 	<div class="row">
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="../Hostal/WebQuienesSomos.aspx">Quienes somos</a>
+            <a style="color: #FFFFFF" href="#">contacto@donaclarita.cl</a>
+
 		</div>
 
 		<div class="footer-content col-md-3">
-			<a style="color: #FFFFFF" href="../Hostal/WebFaqs.aspx">FAQS</a>
+			<a style="color: #FFFFFF" href="#">+5624997364</a>
 		</div>
 
 		<div class="footer-content col-md-3">

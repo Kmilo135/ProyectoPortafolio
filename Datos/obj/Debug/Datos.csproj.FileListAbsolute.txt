@@ -124,3 +124,12 @@ C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\bin\Debug\
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.dll
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\Datos\obj\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll.config
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\bin\Debug\EntityFramework.xml
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\Datos\obj\Debug\Datos.pdb

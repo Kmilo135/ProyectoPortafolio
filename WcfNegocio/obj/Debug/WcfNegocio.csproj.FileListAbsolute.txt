@@ -166,3 +166,15 @@ C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\WcfNegocio\bin\D
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\WcfNegocio\obj\Debug\WcfNegocio.csprojResolveAssemblyReference.cache
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\WcfNegocio\obj\Debug\WcfNegocio.dll
 C:\Users\Cliente\Desktop\asdasdas\Hostalv0.3.0.8\Hostalv0.3.0.8\WcfNegocio\obj\Debug\WcfNegocio.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\WcfNegocio.dll.config
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\WcfNegocio.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\WcfNegocio.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\Datos.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\Modelo.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\EntityFramework.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\Datos.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\Modelo.pdb
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\bin\Debug\EntityFramework.xml
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.csprojResolveAssemblyReference.cache
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.dll
+C:\Users\shogu\Documents\GitHub\ProyectoPortafolio\WcfNegocio\obj\Debug\WcfNegocio.pdb
