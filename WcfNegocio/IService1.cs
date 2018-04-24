@@ -56,6 +56,9 @@ namespace WcfNegocio
         [OperationContract]
         bool AgregarHabitacion(string habitacion);
 
+        [OperationContract]
+        string ListarHabitacion();
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();

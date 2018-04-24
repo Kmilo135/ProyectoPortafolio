@@ -316,6 +316,30 @@ namespace WcfNegocio
             return servicio.AgregarHabitacion(hDatos);
         }
 
+        public string ListarHabitacion()
+        {
+            ServicioHabitacion servicio = new ServicioHabitacion();
+            List<Datos.HABITACION> habitacion = servicio.listarHabitacion();
+            Modelo.HabitacionCollection listaHabitacion = new Modelo.HabitacionCollection();
+
+            foreach (Datos.HABITACION h in habitacion) {
+                Modelo.Habitacion hModelo = new Modelo.Habitacion();
+                hModelo.NUMERO_HABITACION = h.NUMERO_HABITACION;
+                hModelo.PRECIO_HABITACION = h.PRECIO_HABITACION;
+                hModelo.ESTADO_HABITACION = h.ESTADO_HABITACION;
+                hModelo.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
+                hModelo.RUT_CLIENTE = h.RUT_CLIENTE;
+
+                listaHabitacion.Add(hModelo);
+            }
+
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.HabitacionCollection));
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer,listaHabitacion);
+            writer.Close();
+            return writer.ToString();
+        }
+
         //DDL
         public string ListarPais()
         {

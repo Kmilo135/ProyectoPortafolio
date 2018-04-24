@@ -21,5 +21,10 @@ namespace Datos
             ent.SaveChanges();
             return true;
         }
+
+        public List<HABITACION> listarHabitacion()
+        {
+            return ent.HABITACION.ToList();
+        }
     }
 }
