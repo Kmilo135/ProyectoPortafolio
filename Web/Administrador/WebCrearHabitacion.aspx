@@ -25,7 +25,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtNumero" placeholder="Ingrese número de habitación" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                  <asp:TextBox ID="txtNumero" placeholder="Ingrese número de habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="col-sm-12">
                   <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Habitación" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                  <asp:TextBox ID="txtPrecio" placeholder="Ingrese Precio de Habitación" TextMode="Number" runat="server" CssClass="form-control" required="required"></asp:TextBox>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
                       <br/> <asp:Button ID="btnRegistrar" runat="server" Text="Agregar"  CssClass="btn btn-primary btn-lg btn-block login-button" OnClick="btnRegistrar_Click" />
                   </div>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar"  CssClass="btn btn-warning btn-lg btn-block login-button"/>
+                      <br/> <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar"  CssClass="btn btn-warning btn-lg btn-block login-button" OnClick="btnLimpiar_Click"/>
                   </div>
                 </div>   
           </div>

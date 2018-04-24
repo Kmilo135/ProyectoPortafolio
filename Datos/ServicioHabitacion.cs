@@ -26,5 +26,19 @@ namespace Datos
         {
             return ent.HABITACION.ToList();
         }
+
+        public bool ExisteHabitacion(HABITACION habitacion)
+        {
+            HABITACION h = ent.HABITACION.FirstOrDefault(objeto =>
+            objeto.NUMERO_HABITACION.Equals(habitacion.NUMERO_HABITACION));
+            if (h != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

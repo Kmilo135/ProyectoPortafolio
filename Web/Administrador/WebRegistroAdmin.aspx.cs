@@ -115,234 +115,439 @@ namespace Web.Administrador
         {
             try
             {
-                Modelo.Usuario usuario = new Modelo.Usuario();
-                usuario.NOMBRE_USUARIO = txtNombre.Text;
-                string hashed = BCrypt.HashPassword(txtPassword.Text, BCrypt.GenerateSalt(12));
-                usuario.PASSWORD = hashed;
-                usuario.ESTADO = ddlEstado.SelectedValue;
-                usuario.TIPO_USUARIO = ddlTipo.SelectedValue;
-
-                Service1 s = new Service1();
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, usuario);
-
-                if (txtPassword.Text.Equals(txtConfirmar.Text))
+                if (txtNombre.Text != string.Empty && txtPassword.Text != string.Empty && txtConfirmar.Text != string.Empty)
                 {
-                    if (!s.ExisteUsuario(writer.ToString()))
+                    Modelo.Usuario usuario = new Modelo.Usuario();
+                    usuario.NOMBRE_USUARIO = txtNombre.Text;
+                    string hashed = BCrypt.HashPassword(txtPassword.Text, BCrypt.GenerateSalt(12));
+                    usuario.PASSWORD = hashed;
+                    usuario.ESTADO = ddlEstado.SelectedValue;
+                    usuario.TIPO_USUARIO = ddlTipo.SelectedValue;
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, usuario);
+
+                    if (txtPassword.Text.Equals(txtConfirmar.Text))
                     {
-                        if (usuario.TIPO_USUARIO.Equals("Cliente"))
+                        if (!s.ExisteUsuario(writer.ToString()))
                         {
-                            Modelo.Cliente cliente = new Modelo.Cliente();
-                            Modelo.Proveedor proveedor = new Modelo.Proveedor();
-                            Modelo.Empleado empleado = new Modelo.Empleado();
-
-                            cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-                            proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-                            empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-
-                            cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
-                            cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
-                            cliente.NOMBRE_CLIENTE = txtNombreC.Text;
-                            cliente.DIRECCION_CLIENTE = txtDireccion.Text;
-                            if (txtEmail.Text == string.Empty)
+                            if (usuario.TIPO_USUARIO.Equals("Cliente"))
                             {
-                                cliente.CORREO_CLIENTE = "";
-                            }
-                            else
-                            {
-                                cliente.CORREO_CLIENTE = txtEmail.Text;
-                            }
-
-                            if (txtTelefono.Text == string.Empty)
-                            {
-                                cliente.TELEFONO_CLIENTE = 0;
-                            }
-                            else
-                            {
-                                cliente.TELEFONO_CLIENTE = int.Parse(txtTelefono.Text);
-                            }
-
-                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
-                            StringWriter writer2 = new StringWriter();
-                            sr2.Serialize(writer2, cliente);
-                            writer2.Close();
-
-                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
-                            StringWriter writer3 = new StringWriter();
-                            sr3.Serialize(writer3, proveedor);
-                            writer3.Close();
-
-                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
-                            StringWriter writer4 = new StringWriter();
-                            sr4.Serialize(writer4, empleado);
-                            writer4.Close();
-
-                            if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
-                            {
-                                if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                                if (txtRut.Text != string.Empty && txtNombreC.Text != string.Empty && txtDireccion.Text != string.Empty )
                                 {
-                                    exito.Text = "El Usuario ha sido registrado con éxito";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
+                                    int telefono = 0;
+
+                                    if (txtTelefono.Text == string.Empty)
+                                    {
+                                        telefono = 0;
+                                        Modelo.Cliente cliente = new Modelo.Cliente();
+                                        Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                        Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                        cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                        proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                        empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+
+                                        cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
+                                        cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
+                                        cliente.NOMBRE_CLIENTE = txtNombreC.Text;
+                                        cliente.DIRECCION_CLIENTE = txtDireccion.Text;
+                                        if (txtEmail.Text == string.Empty)
+                                        {
+                                            cliente.CORREO_CLIENTE = "";
+                                        }
+                                        else
+                                        {
+                                            cliente.CORREO_CLIENTE = txtEmail.Text;
+                                        }
+
+                                        cliente.TELEFONO_CLIENTE = telefono;
+
+                                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                        StringWriter writer2 = new StringWriter();
+                                        sr2.Serialize(writer2, cliente);
+                                        writer2.Close();
+
+                                        XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                        StringWriter writer3 = new StringWriter();
+                                        sr3.Serialize(writer3, proveedor);
+                                        writer3.Close();
+
+                                        XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                        StringWriter writer4 = new StringWriter();
+                                        sr4.Serialize(writer4, empleado);
+                                        writer4.Close();
+
+                                        if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                        {
+                                            if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                                            {
+                                                //Datos Cliente
+                                                txtRut.Text = string.Empty;
+                                                txtNombreC.Text = string.Empty;
+                                                txtDireccion.Text = string.Empty;
+                                                txtEmail.Text = string.Empty;
+                                                txtTelefono.Text = string.Empty;
+                                                ddlPais.SelectedIndex = 0;
+                                                ddlRegion.SelectedIndex = 0;
+                                                ddlComuna.SelectedIndex = 0;
+
+                                                //Datos Empleado
+                                                txtRut2.Text = string.Empty;
+                                                txtNombreE.Text = string.Empty;
+                                                txtNombre2E.Text = string.Empty;
+                                                txtApellidoP.Text = string.Empty;
+                                                txtApellidoM.Text = string.Empty;
+
+                                                //Datos Proveedor
+                                                txtRut3.Text = string.Empty;
+                                                txtNombreP.Text = string.Empty;
+                                                txtNombre2P.Text = string.Empty;
+                                                txtApellidoP2.Text = string.Empty;
+                                                txtApellidoM2.Text = string.Empty;
+                                                ddlTipoProveedor.SelectedIndex = 0;
+
+                                                exito.Text = "El Usuario ha sido registrado con éxito";
+                                                alerta_exito.Visible = true;
+                                                alerta.Visible = false;
+                                            }
+                                            else
+                                            {
+                                                error.Text = "El registro ha fallado";
+                                                alerta_exito.Visible = false;
+                                                alerta.Visible = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            error.Text = "El Rut ya existe";
+                                            alerta.Visible = true;
+                                            alerta_exito.Visible = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (int.TryParse(txtTelefono.Text, out telefono))
+                                        {
+                                            Modelo.Cliente cliente = new Modelo.Cliente();
+                                            Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                            Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                            cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                            proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                            empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+
+                                            cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
+                                            cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
+                                            cliente.NOMBRE_CLIENTE = txtNombreC.Text;
+                                            cliente.DIRECCION_CLIENTE = txtDireccion.Text;
+                                            if (txtEmail.Text == string.Empty)
+                                            {
+                                                cliente.CORREO_CLIENTE = "";
+                                            }
+                                            else
+                                            {
+                                                cliente.CORREO_CLIENTE = txtEmail.Text;
+                                            }
+
+                                            cliente.TELEFONO_CLIENTE = telefono;
+
+                                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                            StringWriter writer2 = new StringWriter();
+                                            sr2.Serialize(writer2, cliente);
+                                            writer2.Close();
+
+                                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                            StringWriter writer3 = new StringWriter();
+                                            sr3.Serialize(writer3, proveedor);
+                                            writer3.Close();
+
+                                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                            StringWriter writer4 = new StringWriter();
+                                            sr4.Serialize(writer4, empleado);
+                                            writer4.Close();
+
+                                            if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                            {
+                                                if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                                                {
+                                                    //Datos Cliente
+                                                    txtRut.Text = string.Empty;
+                                                    txtNombreC.Text = string.Empty;
+                                                    txtDireccion.Text = string.Empty;
+                                                    txtEmail.Text = string.Empty;
+                                                    txtTelefono.Text = string.Empty;
+                                                    ddlPais.SelectedIndex = 0;
+                                                    ddlRegion.SelectedIndex = 0;
+                                                    ddlComuna.SelectedIndex = 0;
+
+                                                    //Datos Empleado
+                                                    txtRut2.Text = string.Empty;
+                                                    txtNombreE.Text = string.Empty;
+                                                    txtNombre2E.Text = string.Empty;
+                                                    txtApellidoP.Text = string.Empty;
+                                                    txtApellidoM.Text = string.Empty;
+
+                                                    //Datos Proveedor
+                                                    txtRut3.Text = string.Empty;
+                                                    txtNombreP.Text = string.Empty;
+                                                    txtNombre2P.Text = string.Empty;
+                                                    txtApellidoP2.Text = string.Empty;
+                                                    txtApellidoM2.Text = string.Empty;
+                                                    ddlTipoProveedor.SelectedIndex = 0;
+
+                                                    exito.Text = "El Usuario ha sido registrado con éxito";
+                                                    alerta_exito.Visible = true;
+                                                    alerta.Visible = false;
+                                                }
+                                                else
+                                                {
+                                                    error.Text = "El registro ha fallado";
+                                                    alerta_exito.Visible = false;
+                                                    alerta.Visible = true;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                error.Text = "El Rut ya existe";
+                                                alerta.Visible = true;
+                                                alerta_exito.Visible = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            error.Text = "Verifique que el ingreso de números no contenga carácteres";
+                                            alerta_exito.Visible = false;
+                                            alerta.Visible = true;
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    error.Text = "El registro ha fallado";
-                                    alerta_exito.Visible = false;
+                                    error.Text = "Debe llenar los datos requeridos de Cliente";
                                     alerta.Visible = true;
+                                    alerta_exito.Visible = false;
                                 }
                             }
-                            else
+                            else if (usuario.TIPO_USUARIO.Equals("Empleado"))
                             {
-                                error.Text = "El Rut ya existe";
-                                alerta.Visible = true;
-                                alerta_exito.Visible = false;
-                            }
-                        }
-                        else if (usuario.TIPO_USUARIO.Equals("Empleado"))
-                        {
-                            Modelo.Cliente cliente = new Modelo.Cliente();
-                            Modelo.Proveedor proveedor = new Modelo.Proveedor();
-                            Modelo.Empleado empleado = new Modelo.Empleado();
-
-                            empleado.RUT_EMPLEADO = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
-                            proveedor.RUT_PROVEEDOR = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
-                            cliente.RUT_CLIENTE = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
-
-                            empleado.PNOMBRE_EMPLEADO = txtNombreE.Text;
-
-                            if (txtNombre2E.Text == string.Empty)
-                            {
-                                empleado.SNOMBRE_EMPLEADO = "";
-                            }
-                            else
-                            {
-                                empleado.SNOMBRE_EMPLEADO = txtNombre2E.Text;
-                            }
-                            empleado.APP_PATERNO_EMPLEADO = txtApellidoP.Text;
-                            empleado.APP_MATERNO_EMPLEADO = txtApellidoM.Text;
-
-                            empleado.DV_EMPLEADO = txtRut2.Text.Substring(txtRut2.Text.Length - 1);
-
-                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
-                            StringWriter writer2 = new StringWriter();
-                            sr2.Serialize(writer2, cliente);
-                            writer2.Close();
-
-                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
-                            StringWriter writer3 = new StringWriter();
-                            sr3.Serialize(writer3, proveedor);
-                            writer3.Close();
-
-                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
-                            StringWriter writer4 = new StringWriter();
-                            sr4.Serialize(writer4, empleado);
-                            writer4.Close();
-
-                            if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
-                            {
-                                if (s.RegistroUsuario(writer.ToString()) && s.RegistroEmpleado(writer4.ToString()))
+                                if (txtRut2.Text != string.Empty && txtNombreE.Text != string.Empty && txtApellidoP.Text != string.Empty && txtApellidoM.Text != string.Empty)
                                 {
-                                    exito.Text = "El Empleado ha sido registrado con éxito";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
+                                    Modelo.Cliente cliente = new Modelo.Cliente();
+                                    Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                    Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                    empleado.RUT_EMPLEADO = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
+                                    proveedor.RUT_PROVEEDOR = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
+                                    cliente.RUT_CLIENTE = int.Parse(txtRut2.Text.Substring(0, txtRut2.Text.Length - 2));
+
+                                    empleado.PNOMBRE_EMPLEADO = txtNombreE.Text;
+
+                                    if (txtNombre2E.Text == string.Empty)
+                                    {
+                                        empleado.SNOMBRE_EMPLEADO = "";
+                                    }
+                                    else
+                                    {
+                                        empleado.SNOMBRE_EMPLEADO = txtNombre2E.Text;
+                                    }
+                                    empleado.APP_PATERNO_EMPLEADO = txtApellidoP.Text;
+                                    empleado.APP_MATERNO_EMPLEADO = txtApellidoM.Text;
+
+                                    empleado.DV_EMPLEADO = txtRut2.Text.Substring(txtRut2.Text.Length - 1);
+
+                                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                    StringWriter writer2 = new StringWriter();
+                                    sr2.Serialize(writer2, cliente);
+                                    writer2.Close();
+
+                                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                    StringWriter writer3 = new StringWriter();
+                                    sr3.Serialize(writer3, proveedor);
+                                    writer3.Close();
+
+                                    XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                    StringWriter writer4 = new StringWriter();
+                                    sr4.Serialize(writer4, empleado);
+                                    writer4.Close();
+
+                                    if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                    {
+                                        if (s.RegistroUsuario(writer.ToString()) && s.RegistroEmpleado(writer4.ToString()))
+                                        {
+                                            //Datos Cliente
+                                            txtRut.Text = string.Empty;
+                                            txtNombreC.Text = string.Empty;
+                                            txtDireccion.Text = string.Empty;
+                                            txtEmail.Text = string.Empty;
+                                            txtTelefono.Text = string.Empty;
+                                            ddlPais.SelectedIndex = 0;
+                                            ddlRegion.SelectedIndex = 0;
+                                            ddlComuna.SelectedIndex = 0;
+
+                                            //Datos Empleado
+                                            txtRut2.Text = string.Empty;
+                                            txtNombreE.Text = string.Empty;
+                                            txtNombre2E.Text = string.Empty;
+                                            txtApellidoP.Text = string.Empty;
+                                            txtApellidoM.Text = string.Empty;
+
+                                            //Datos Proveedor
+                                            txtRut3.Text = string.Empty;
+                                            txtNombreP.Text = string.Empty;
+                                            txtNombre2P.Text = string.Empty;
+                                            txtApellidoP2.Text = string.Empty;
+                                            txtApellidoM2.Text = string.Empty;
+                                            ddlTipoProveedor.SelectedIndex = 0;
+
+                                            exito.Text = "El Empleado ha sido registrado con éxito";
+                                            alerta_exito.Visible = true;
+                                            alerta.Visible = false;
+                                        }
+                                        else
+                                        {
+                                            alerta_exito.Visible = false;
+                                            error.Text = "El registro ha fallado";
+                                            alerta.Visible = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        alerta_exito.Visible = false;
+                                        error.Text = "El Rut ya existe";
+                                        alerta.Visible = true;
+                                    }
                                 }
                                 else
                                 {
                                     alerta_exito.Visible = false;
-                                    error.Text = "El registro ha fallado";
+                                    error.Text = "Debe llenar los datos requeridos de Empleado";
                                     alerta.Visible = true;
                                 }
                             }
-                            else
+                            else if (usuario.TIPO_USUARIO.Equals("Proveedor"))
                             {
-                                alerta_exito.Visible = false;
-                                error.Text = "El Rut ya existe";
-                                alerta.Visible = true;
-                            }
-                        }
-                        else if (usuario.TIPO_USUARIO.Equals("Proveedor"))
-                        {
-                            Modelo.Cliente cliente = new Modelo.Cliente();
-                            Modelo.Proveedor proveedor = new Modelo.Proveedor();
-                            Modelo.Empleado empleado = new Modelo.Empleado();
-
-                            empleado.RUT_EMPLEADO = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
-                            proveedor.RUT_PROVEEDOR = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
-                            cliente.RUT_CLIENTE = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
-                            proveedor.DV_PROVEEDOR = txtRut3.Text.Substring(txtRut3.Text.Length - 1);
-                            proveedor.PNOMBRE_PROVEEDOR = txtNombreP.Text;
-
-                            if (txtNombre2P.Text == string.Empty)
-                            {
-                                proveedor.SNOMBRE_PROVEEDOR = "";
-                            }
-                            else
-                            {
-                                proveedor.SNOMBRE_PROVEEDOR = txtNombre2P.Text;
-                            }
-
-                            proveedor.APP_PATERNO_PROVEEDOR = txtApellidoP2.Text;
-                            proveedor.APP_MATERNO_PROVEEDOR = txtApellidoM2.Text;
-                            proveedor.ID_TIPO_PROVEEDOR = short.Parse(ddlTipoProveedor.SelectedValue);
-
-
-                            XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
-                            StringWriter writer2 = new StringWriter();
-                            sr2.Serialize(writer2, cliente);
-                            writer2.Close();
-
-                            XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
-                            StringWriter writer3 = new StringWriter();
-                            sr3.Serialize(writer3, proveedor);
-                            writer3.Close();
-
-                            XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
-                            StringWriter writer4 = new StringWriter();
-                            sr4.Serialize(writer4, empleado);
-                            writer4.Close();
-
-                            if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
-                            {
-                                if (s.RegistroUsuario(writer.ToString()) && s.RegistroProveedor(writer3.ToString()))
+                                if (txtRut3.Text != string.Empty && txtNombreP.Text != string.Empty && txtApellidoP2.Text != string.Empty && txtApellidoM2.Text != string.Empty)
                                 {
-                                    exito.Text = "El Proveedor ha sido registrado con éxito";
-                                    alerta_exito.Visible = true;
-                                    alerta.Visible = false;
+                                    Modelo.Cliente cliente = new Modelo.Cliente();
+                                    Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                    Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                    empleado.RUT_EMPLEADO = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
+                                    proveedor.RUT_PROVEEDOR = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
+                                    cliente.RUT_CLIENTE = int.Parse(txtRut3.Text.Substring(0, txtRut3.Text.Length - 2));
+                                    proveedor.DV_PROVEEDOR = txtRut3.Text.Substring(txtRut3.Text.Length - 1);
+                                    proveedor.PNOMBRE_PROVEEDOR = txtNombreP.Text;
+
+                                    if (txtNombre2P.Text == string.Empty)
+                                    {
+                                        proveedor.SNOMBRE_PROVEEDOR = "";
+                                    }
+                                    else
+                                    {
+                                        proveedor.SNOMBRE_PROVEEDOR = txtNombre2P.Text;
+                                    }
+
+                                    proveedor.APP_PATERNO_PROVEEDOR = txtApellidoP2.Text;
+                                    proveedor.APP_MATERNO_PROVEEDOR = txtApellidoM2.Text;
+                                    proveedor.ID_TIPO_PROVEEDOR = short.Parse(ddlTipoProveedor.SelectedValue);
+
+                                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                    StringWriter writer2 = new StringWriter();
+                                    sr2.Serialize(writer2, cliente);
+                                    writer2.Close();
+
+                                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                    StringWriter writer3 = new StringWriter();
+                                    sr3.Serialize(writer3, proveedor);
+                                    writer3.Close();
+
+                                    XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                    StringWriter writer4 = new StringWriter();
+                                    sr4.Serialize(writer4, empleado);
+                                    writer4.Close();
+
+                                    if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                    {
+                                        if (s.RegistroUsuario(writer.ToString()) && s.RegistroProveedor(writer3.ToString()))
+                                        {
+                                            //Datos Cliente
+                                            txtRut.Text = string.Empty;
+                                            txtNombreC.Text = string.Empty;
+                                            txtDireccion.Text = string.Empty;
+                                            txtEmail.Text = string.Empty;
+                                            txtTelefono.Text = string.Empty;
+                                            ddlPais.SelectedIndex = 0;
+                                            ddlRegion.SelectedIndex = 0;
+                                            ddlComuna.SelectedIndex = 0;
+
+                                            //Datos Empleado
+                                            txtRut2.Text = string.Empty;
+                                            txtNombreE.Text = string.Empty;
+                                            txtNombre2E.Text = string.Empty;
+                                            txtApellidoP.Text = string.Empty;
+                                            txtApellidoM.Text = string.Empty;
+
+                                            //Datos Proveedor
+                                            txtRut3.Text = string.Empty;
+                                            txtNombreP.Text = string.Empty;
+                                            txtNombre2P.Text = string.Empty;
+                                            txtApellidoP2.Text = string.Empty;
+                                            txtApellidoM2.Text = string.Empty;
+                                            ddlTipoProveedor.SelectedIndex = 0;
+
+                                            exito.Text = "El Proveedor ha sido registrado con éxito";
+                                            alerta_exito.Visible = true;
+                                            alerta.Visible = false;
+                                        }
+                                        else
+                                        {
+                                            alerta_exito.Visible = false;
+                                            error.Text = "El registro ha fallado";
+                                            alerta.Visible = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        alerta_exito.Visible = false;
+                                        error.Text = "El Rut ya existe";
+                                        alerta.Visible = true;
+                                    }
                                 }
                                 else
                                 {
                                     alerta_exito.Visible = false;
-                                    error.Text = "El registro ha fallado";
+                                    error.Text = "Debe llenar los datos requeridos de Proveedor";
                                     alerta.Visible = true;
-                                }
+                                } 
                             }
-                            else
+                            else //Tipos de usuario
                             {
                                 alerta_exito.Visible = false;
-                                error.Text = "El Rut ya existe";
+                                error.Text = "El Tipo ingresado no es válido";
                                 alerta.Visible = true;
                             }
                         }
-                        else //Tipos de usuario
+                        else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "El Tipo ingresado no es válido";
+                            error.Text = "El Nombre de usuario ya ha sido utilizado. Intente con otro";
                             alerta.Visible = true;
-                        }     
+                        }
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "El Nombre de usuario ya ha sido utilizado. Intente con otro";
+                        error.Text = "Las Contraseñas no coinciden";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
                     alerta_exito.Visible = false;
-                    error.Text = "Las Contraseñas no coinciden";
+                    error.Text = "Debe rellenar todos los datos de Usuario";
                     alerta.Visible = true;
                 }
             }
@@ -356,7 +561,37 @@ namespace Web.Administrador
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
+            //Datos Usuario
+            txtNombre.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirmar.Text = string.Empty;
+            ddlEstado.SelectedIndex = 0;
+            ddlTipo.SelectedIndex = 0;
 
+            //Datos Cliente
+            txtRut.Text = string.Empty;
+            txtNombreC.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            ddlPais.SelectedIndex = 0;
+            ddlRegion.SelectedIndex = 0;
+            ddlComuna.SelectedIndex = 0;
+
+            //Datos Empleado
+            txtRut2.Text = string.Empty;
+            txtNombreE.Text = string.Empty;
+            txtNombre2E.Text = string.Empty;
+            txtApellidoP.Text = string.Empty;
+            txtApellidoM.Text = string.Empty;
+
+            //Datos Proveedor
+            txtRut3.Text = string.Empty;
+            txtNombreP.Text = string.Empty;
+            txtNombre2P.Text = string.Empty;
+            txtApellidoP2.Text = string.Empty;
+            txtApellidoM2.Text = string.Empty;
+            ddlTipoProveedor.SelectedIndex = 0;
         }
 
         protected void ddlPais_SelectedIndexChanged(object sender, EventArgs e)

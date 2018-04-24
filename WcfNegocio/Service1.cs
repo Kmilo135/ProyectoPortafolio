@@ -340,6 +340,25 @@ namespace WcfNegocio
             return writer.ToString();
         }
 
+        public bool ExisteHabitacion(string habitacion)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Habitacion));
+            StringReader reader = new StringReader(habitacion);
+            Modelo.Habitacion h = (Modelo.Habitacion)ser.Deserialize(reader);
+            ServicioHabitacion serv = new ServicioHabitacion();
+            Datos.HABITACION hDatos = new Datos.HABITACION();
+            hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
+
+            if (!serv.ExisteHabitacion(hDatos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         //DDL
         public string ListarPais()
         {

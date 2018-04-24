@@ -66,94 +66,190 @@ namespace Web
         {
             try
             {
-                Modelo.Usuario usuario = new Modelo.Usuario();
-                usuario.NOMBRE_USUARIO = txtNombre.Text;
-                string hashed = BCrypt.HashPassword(txtPassword.Text, BCrypt.GenerateSalt(12));
-                usuario.PASSWORD = hashed;
-                usuario.ESTADO = "Habilitado";
-                usuario.TIPO_USUARIO = "Cliente";
-
-                Service1 s = new Service1();
-                XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
-                StringWriter writer = new StringWriter();
-                sr.Serialize(writer, usuario);
-
-                if (txtPassword.Text.Equals(txtConfirmar.Text))
+                if (txtNombre.Text != string.Empty && txtPassword.Text != string.Empty && txtConfirmar.Text != string.Empty)
                 {
-                    if (!s.ExisteUsuario(writer.ToString()))
+                    Modelo.Usuario usuario = new Modelo.Usuario();
+                    usuario.NOMBRE_USUARIO = txtNombre.Text;
+                    string hashed = BCrypt.HashPassword(txtPassword.Text, BCrypt.GenerateSalt(12));
+                    usuario.PASSWORD = hashed;
+                    usuario.ESTADO = "Habilitado";
+                    usuario.TIPO_USUARIO = "Cliente";
+
+                    Service1 s = new Service1();
+                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Usuario));
+                    StringWriter writer = new StringWriter();
+                    sr.Serialize(writer, usuario);
+
+                    if (txtPassword.Text.Equals(txtConfirmar.Text))
                     {
-                        Modelo.Cliente cliente = new Modelo.Cliente();
-                        Modelo.Proveedor proveedor = new Modelo.Proveedor();
-                        Modelo.Empleado empleado = new Modelo.Empleado();
-
-                        cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-                        proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-                        empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
-
-                        cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
-                        cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
-                        cliente.DIRECCION_CLIENTE = txtDireccion.Text;
-                        cliente.NOMBRE_CLIENTE = txtNombreC.Text;
-                        if (txtEmail.Text == string.Empty)
+                        if (!s.ExisteUsuario(writer.ToString()))
                         {
-                            cliente.CORREO_CLIENTE = "";
-                        }
-                        else
-                        {
-                            cliente.CORREO_CLIENTE = txtEmail.Text;
-                        }
-
-                        if (txtTelefono.Text == string.Empty)
-                        {
-                            cliente.TELEFONO_CLIENTE = 0;
-                        }
-                        else
-                        {
-                            cliente.TELEFONO_CLIENTE = int.Parse(txtTelefono.Text);
-                        }
-
-                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
-                        StringWriter writer2 = new StringWriter();
-                        sr2.Serialize(writer2, cliente);
-                        writer2.Close();
-
-                        XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
-                        StringWriter writer3 = new StringWriter();
-                        sr3.Serialize(writer3, proveedor);
-                        writer3.Close();
-
-                        XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
-                        StringWriter writer4 = new StringWriter();
-                        sr4.Serialize(writer4, empleado);
-                        writer4.Close();
-
-                        if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
-                        {
-                            if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                            if (txtRut.Text != string.Empty && txtNombreC.Text != string.Empty && txtDireccion.Text != string.Empty)
                             {
-                                Response.Write("<script language='javascript'>window.alert('Se ha registrado con éxito. pruebe iniciar sesión');window.location='../Hostal/WebLogin.aspx';</script>");
+                                int telefono = 0;
+
+                                if (txtTelefono.Text == string.Empty)
+                                {
+
+                                    Modelo.Cliente cliente = new Modelo.Cliente();
+                                    Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                    Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                    cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                    proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                    empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+
+                                    cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
+                                    cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
+                                    cliente.DIRECCION_CLIENTE = txtDireccion.Text;
+                                    cliente.NOMBRE_CLIENTE = txtNombreC.Text;
+                                    if (txtEmail.Text == string.Empty)
+                                    {
+                                        cliente.CORREO_CLIENTE = "";
+                                    }
+                                    else
+                                    {
+                                        cliente.CORREO_CLIENTE = txtEmail.Text;
+                                    }
+
+                                    cliente.TELEFONO_CLIENTE = telefono;
+
+                                    XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                    StringWriter writer2 = new StringWriter();
+                                    sr2.Serialize(writer2, cliente);
+                                    writer2.Close();
+
+                                    XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                    StringWriter writer3 = new StringWriter();
+                                    sr3.Serialize(writer3, proveedor);
+                                    writer3.Close();
+
+                                    XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                    StringWriter writer4 = new StringWriter();
+                                    sr4.Serialize(writer4, empleado);
+                                    writer4.Close();
+
+                                    if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                    {
+                                        if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                                        {
+                                            Response.Write("<script language='javascript'>window.alert('Se ha registrado con éxito. pruebe iniciar sesión');window.location='../Hostal/WebLogin.aspx';</script>");
+                                        }
+                                        else
+                                        {
+                                            error.Text = "El registro ha fallado";
+                                            alerta.Visible = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        error.Text = "El Rut ya existe";
+                                        alerta.Visible = true;
+                                    }
+                                }
+                                else
+                                {
+                                    if (int.TryParse(txtTelefono.Text, out telefono))
+                                    {
+                                        Modelo.Cliente cliente = new Modelo.Cliente();
+                                        Modelo.Proveedor proveedor = new Modelo.Proveedor();
+                                        Modelo.Empleado empleado = new Modelo.Empleado();
+
+                                        cliente.RUT_CLIENTE = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                        proveedor.RUT_PROVEEDOR = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+                                        empleado.RUT_EMPLEADO = int.Parse(txtRut.Text.Substring(0, txtRut.Text.Length - 2));
+
+                                        cliente.ID_COMUNA = short.Parse(ddlComuna.SelectedValue);
+                                        cliente.DV_CLIENTE = txtRut.Text.Substring(txtRut.Text.Length - 1);
+                                        cliente.DIRECCION_CLIENTE = txtDireccion.Text;
+                                        cliente.NOMBRE_CLIENTE = txtNombreC.Text;
+                                        if (txtEmail.Text == string.Empty)
+                                        {
+                                            cliente.CORREO_CLIENTE = "";
+                                        }
+                                        else
+                                        {
+                                            cliente.CORREO_CLIENTE = txtEmail.Text;
+                                        }
+
+                                        cliente.TELEFONO_CLIENTE = telefono;
+
+                                        XmlSerializer sr2 = new XmlSerializer(typeof(Modelo.Cliente));
+                                        StringWriter writer2 = new StringWriter();
+                                        sr2.Serialize(writer2, cliente);
+                                        writer2.Close();
+
+                                        XmlSerializer sr3 = new XmlSerializer(typeof(Modelo.Proveedor));
+                                        StringWriter writer3 = new StringWriter();
+                                        sr3.Serialize(writer3, proveedor);
+                                        writer3.Close();
+
+                                        XmlSerializer sr4 = new XmlSerializer(typeof(Modelo.Empleado));
+                                        StringWriter writer4 = new StringWriter();
+                                        sr4.Serialize(writer4, empleado);
+                                        writer4.Close();
+
+                                        if (!s.ExisteRutC(writer2.ToString()) && !s.ExisteRutP(writer3.ToString()) && !s.ExisteRutE(writer4.ToString()))
+                                        {
+                                            if (s.RegistroUsuario(writer.ToString()) && s.RegistroCliente(writer2.ToString()))
+                                            {
+                                                //Datos Usuario
+                                                txtNombre.Text = string.Empty;
+                                                txtPassword.Text = string.Empty;
+                                                txtConfirmar.Text = string.Empty;
+
+                                                //Datos Cliente
+                                                txtRut.Text = string.Empty;
+                                                txtNombreC.Text = string.Empty;
+                                                txtDireccion.Text = string.Empty;
+                                                txtEmail.Text = string.Empty;
+                                                txtTelefono.Text = string.Empty;
+                                                ddlPais.SelectedIndex = 0;
+                                                ddlRegion.SelectedIndex = 0;
+                                                ddlComuna.SelectedIndex = 0;
+
+                                                Response.Write("<script language='javascript'>window.alert('Se ha registrado con éxito. pruebe iniciar sesión');window.location='../Hostal/WebLogin.aspx';</script>");
+                                            }
+                                            else
+                                            {
+                                                error.Text = "El registro ha fallado";
+                                                alerta.Visible = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            error.Text = "El Rut ya existe";
+                                            alerta.Visible = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        error.Text = "Verifique que ha ingresado el teléfono correctamente";
+                                        alerta.Visible = true;
+                                    }
+                                } 
                             }
                             else
                             {
-                                error.Text = "El registro ha fallado";
+                                error.Text = "Verifique que ha ingresados todos los datos requeridos de Cliente";
                                 alerta.Visible = true;
                             }
                         }
                         else
                         {
-                            error.Text = "El Rut ya existe";
+                            error.Text = "El Nombre de usuario ya ha sido utilizado. Intente con otro";
                             alerta.Visible = true;
                         }
                     }
                     else
                     {
-                        error.Text = "El Nombre de usuario ya ha sido utilizado. Intente con otro";
+                        error.Text = "Las Contraseñas no coinciden";
                         alerta.Visible = true;
                     }
                 }
                 else
                 {
-                    error.Text = "Las Contraseñas no coinciden";
+                    error.Text = "Verifique que todos los datos de usuario hayan sido ingresados";
                     alerta.Visible = true;
                 }
             }
@@ -166,7 +262,20 @@ namespace Web
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
+            //Datos Usuario
+            txtNombre.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirmar.Text = string.Empty;
 
+            //Datos Cliente
+            txtRut.Text = string.Empty;
+            txtNombreC.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            ddlPais.SelectedIndex = 0;
+            ddlRegion.SelectedIndex = 0;
+            ddlComuna.SelectedIndex = 0;
         }
 
         protected void ddlPais_SelectedIndexChanged(object sender, EventArgs e)

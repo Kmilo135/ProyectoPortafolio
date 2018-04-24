@@ -87,29 +87,51 @@ namespace Web.Administrador
         {
             try
             {
+                short numero = 0;
+                int precio = 0;
+
                 if (txtNumero.Text != string.Empty && txtPrecio.Text != string.Empty)
                 {
-                    Modelo.Habitacion habitacion = new Modelo.Habitacion();
-                    habitacion.NUMERO_HABITACION = short.Parse(txtNumero.Text);
-                    habitacion.PRECIO_HABITACION = int.Parse(txtPrecio.Text);
-                    habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
-                    habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
-
-                    Service1 s = new Service1();
-                    XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
-                    StringWriter writer = new StringWriter();
-                    sr.Serialize(writer, habitacion);
-
-                    if (s.AgregarHabitacion(writer.ToString()))
+                    if (short.TryParse(txtNumero.Text, out numero) && int.TryParse(txtPrecio.Text, out precio))
                     {
-                        exito.Text = "La habitación ha sido creada con éxito";
-                        alerta_exito.Visible = true;
-                        alerta.Visible = false;
+                        Modelo.Habitacion habitacion = new Modelo.Habitacion();
+                        habitacion.NUMERO_HABITACION = numero;
+                        habitacion.PRECIO_HABITACION = precio;
+                        habitacion.ESTADO_HABITACION = ddlEstado.SelectedValue;
+                        habitacion.ID_TIPO_HABITACION = short.Parse(ddlTipo.SelectedValue);
+
+                        Service1 s = new Service1();
+                        XmlSerializer sr = new XmlSerializer(typeof(Modelo.Habitacion));
+                        StringWriter writer = new StringWriter();
+                        sr.Serialize(writer, habitacion);
+
+                        if (!s.ExisteHabitacion(writer.ToString()))
+                        {
+                            if (s.AgregarHabitacion(writer.ToString()))
+                            {
+                                exito.Text = "La habitación ha sido creada con éxito";
+                                alerta_exito.Visible = true;
+                                alerta.Visible = false;
+                            }
+                            else
+                            {
+                                alerta_exito.Visible = false;
+                                error.Text = "No se ha podido agregar";
+                                alerta.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            alerta_exito.Visible = false;
+                            error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado numeros correctamente";
+                            alerta.Visible = true;
+                        }
+                        
                     }
                     else
                     {
                         alerta_exito.Visible = false;
-                        error.Text = "No se ha podido agregar";
+                        error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado numeros correctamente";
                         alerta.Visible = true;
                     }
                 }
@@ -127,6 +149,14 @@ namespace Web.Administrador
                 error.Text = "Excepcion";
                 alerta.Visible = true;
             }
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNumero.Text = string.Empty;
+            txtPrecio.Text = string.Empty;
+            ddlEstado.SelectedIndex = 0;
+            ddlTipo.SelectedIndex = 0;
         }
     }
 }
