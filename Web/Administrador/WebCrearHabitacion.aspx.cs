@@ -123,7 +123,7 @@ namespace Web.Administrador
                         else
                         {
                             alerta_exito.Visible = false;
-                            error.Text = "Datos Ingresados incorrectamente, verifique que ha ingresado numeros correctamente";
+                            error.Text = "La habitación ya existe";
                             alerta.Visible = true;
                         }
                         

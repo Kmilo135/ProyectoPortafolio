@@ -16,13 +16,16 @@
                             <SortedDescendingCellStyle BackColor="#E9EBEF" />
                             <SortedDescendingHeaderStyle BackColor="#4870BE" />
                             <Columns>
-                                 <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="ID_USUARIO" />
+                                 <asp:BoundField DataField="NUMERO_HABITACION" HeaderText="NUMERO_HABITACION" />
                                 <asp:BoundField DataField="PRECIO_HABITACION" HeaderText="PRECIO_HABITACION" />
                                 <asp:BoundField DataField="ESTADO_HABITACION" HeaderText="ESTADO_HABITACION" />
                                 <asp:BoundField DataField="ID_TIPO_HABITACION" HeaderText="ID_TIPO_HABITACION" />
                                 <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT_CLIENTE" />
-                                 <asp:CommandField ShowEditButton="true" UpdateText="Editar" CancelText="Cancel" ItemStyle-CssClass="btn btn-success" > <ItemStyle CssClass="btn btn-success"></ItemStyle> </asp:CommandField>
-                                 <asp:CommandField ShowDeleteButton="true" DeleteText="Eliminar" CancelText="Cancel"  ItemStyle-CssClass="btn btn-danger"   > <ItemStyle CssClass="margin-right: 10px; btn btn-danger"></ItemStyle></asp:CommandField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnEditar" onclick="btnEditar_Click" CssClass="btn btn-success" CommandArgument='<%#Eval("NUMERO_HABITACION")%>'  text="Editar" runat="server"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
         </div>    

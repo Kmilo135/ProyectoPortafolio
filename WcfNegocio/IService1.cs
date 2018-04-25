@@ -62,6 +62,12 @@ namespace WcfNegocio
         [OperationContract]
         string ListarHabitacion();
 
+        [OperationContract]
+        Habitacion ObtenerHabitacion(string habitacion);
+
+        [OperationContract]
+        bool ModificarHabitacion(string habitacion);
+
         //DDL
         [OperationContract]
         string ListarTipoProveedor();

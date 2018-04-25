@@ -49,15 +49,6 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button btnCrearUsuario;
         
         /// <summary>
-        /// Control btnEditarUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarUsuario;
-        
-        /// <summary>
         /// Control btnVerUsuarios.
         /// </summary>
         /// <remarks>
@@ -83,23 +74,5 @@ namespace Web {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCrearHabitacion;
-        
-        /// <summary>
-        /// Control btnModificarHabitacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarHabitacion;
-        
-        /// <summary>
-        /// Control btnEliminarHabitacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarHabitacion;
     }
 }

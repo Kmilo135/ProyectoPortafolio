@@ -71,8 +71,6 @@
         <ul class="dropdown-menu">
           <li><a href="../Administrador/WebVerHabitacion.aspx">Ver Habitaciones</a></li>
           <li><a href="../Administrador/WebCrearHabitacion.aspx">Crear Habitación</a></li>
-		  <li><a href="../Administrador/WebEditarHabitacion.aspx">Modificar Habitación</a></li>
-		  <li><a href="../Administrador/WebEliminarHabitacion.aspx">Eliminar Habitación</a></li>
         </ul>
       </li>
         <li><a href="WebInformes.aspx">Informes</a></li>

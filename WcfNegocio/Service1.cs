@@ -359,6 +359,49 @@ namespace WcfNegocio
             }
         }
 
+        public Habitacion ObtenerHabitacion(string habitacion)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Habitacion));
+            StringReader reader = new StringReader(habitacion);
+            Modelo.Habitacion h = (Modelo.Habitacion)ser.Deserialize(reader);
+            ServicioHabitacion serv = new ServicioHabitacion();
+            Datos.HABITACION hDatos = new Datos.HABITACION();
+            hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
+
+            if (!serv.ExisteHabitacion(hDatos))
+            {
+                return null;
+            }
+            else
+            {
+                Datos.HABITACION hDatos2 = serv.obtenerHabitacion(hDatos);
+                h.NUMERO_HABITACION = hDatos2.NUMERO_HABITACION;
+                h.PRECIO_HABITACION = hDatos2.PRECIO_HABITACION;
+                h.ESTADO_HABITACION = hDatos2.ESTADO_HABITACION;
+                h.RUT_CLIENTE = hDatos2.RUT_CLIENTE;
+                h.ID_TIPO_HABITACION = hDatos2.ID_TIPO_HABITACION;
+
+                return h;
+            }
+        }
+
+        public bool ModificarHabitacion(string habitacion)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(Modelo.Habitacion));
+            StringReader reader = new StringReader(habitacion);
+            Modelo.Habitacion h = (Modelo.Habitacion)ser.Deserialize(reader);
+            ServicioHabitacion serv = new ServicioHabitacion();
+            Datos.HABITACION hDatos = new Datos.HABITACION();
+
+            hDatos.NUMERO_HABITACION = h.NUMERO_HABITACION;
+            hDatos.PRECIO_HABITACION = h.PRECIO_HABITACION;
+            hDatos.ID_TIPO_HABITACION = h.ID_TIPO_HABITACION;
+            hDatos.ESTADO_HABITACION = h.ESTADO_HABITACION;
+            hDatos.RUT_CLIENTE = h.RUT_CLIENTE;
+
+            return serv.EditarHabitacion(hDatos);
+        }
+
         //DDL
         public string ListarPais()
         {
