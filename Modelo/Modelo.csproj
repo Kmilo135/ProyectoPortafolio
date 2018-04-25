@@ -41,15 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="ClienteCollection.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="ComunaCollection.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="EmpleadoCollection.cs" />
+    <Compile Include="Enumerable.cs" />
     <Compile Include="Habitacion.cs" />
     <Compile Include="HabitacionCollection.cs" />
     <Compile Include="Pais.cs" />
     <Compile Include="PaisCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor.cs" />
+    <Compile Include="ProveedorCollection.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RegionCollection.cs" />
     <Compile Include="TipoHabitacion.cs" />
