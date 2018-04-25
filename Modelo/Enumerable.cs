@@ -11,4 +11,8 @@ namespace Modelo {
         Proveedor,
         Empleado
     }
+    public enum Estado_Usuario {
+        Habilitado,
+        Deshabilitado
+    }
 }

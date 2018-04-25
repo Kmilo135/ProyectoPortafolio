@@ -96,7 +96,6 @@
   <ItemGroup>
     <Content Include="Administrador\WebCrearHabitacion.aspx" />
     <Content Include="Administrador\WebEditarHabitacion.aspx" />
-    <Content Include="Administrador\WebEditarUsuario.aspx" />
     <Content Include="Administrador\WebEliminarHabitacion.aspx" />
     <Content Include="Administrador\WebInformes.aspx" />
     <Content Include="Administrador\WebVerHabitacion.aspx" />
@@ -171,13 +170,6 @@
     </Compile>
     <Compile Include="Administrador\WebEditarHabitacion.aspx.designer.cs">
       <DependentUpon>WebEditarHabitacion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administrador\WebEditarUsuario.aspx.cs">
-      <DependentUpon>WebEditarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administrador\WebEditarUsuario.aspx.designer.cs">
-      <DependentUpon>WebEditarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\WebEliminarHabitacion.aspx.cs">
       <DependentUpon>WebEliminarHabitacion.aspx</DependentUpon>

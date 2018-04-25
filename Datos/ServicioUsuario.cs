@@ -9,6 +9,7 @@ namespace Datos
     public class ServicioUsuario
     {
         HostalEntities ent = new HostalEntities();
+
         public USUARIO EncontrarUsuario(USUARIO u)
         {
             USUARIO usuario = ent.USUARIO.FirstOrDefault(objeto =>
@@ -81,9 +82,7 @@ namespace Datos
             else
             {
                 //Se modifica cada atributo y se guardan los cambios en la base de datos
-                usuario.NOMBRE_USUARIO = u.NOMBRE_USUARIO;
                 usuario.PASSWORD = u.PASSWORD;
-                usuario.TIPO_USUARIO = u.TIPO_USUARIO;
                 usuario.ESTADO = u.ESTADO;
                 ent.SaveChanges();
                 return true;

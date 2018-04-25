@@ -52,6 +52,7 @@ namespace WcfNegocio
 
             ServicioUsuario serv = new ServicioUsuario();
             Datos.USUARIO uDatos2 = serv.EncontrarUsuario(uDatos);
+            usuario.ID_USUARIO = uDatos2.ID_USUARIO;
             usuario.NOMBRE_USUARIO = uDatos2.NOMBRE_USUARIO;
             usuario.PASSWORD = uDatos2.PASSWORD;
             usuario.TIPO_USUARIO = uDatos2.TIPO_USUARIO;

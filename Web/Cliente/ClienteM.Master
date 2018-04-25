@@ -27,7 +27,8 @@
     <ul class="nav navbar-nav">
 		<li class="active"><a href="../Cliente/WebCliente.aspx">Inicio</a></li>
 		<li><a href="../Cliente/WebCrearOrden.aspx">Crear Orden</a></li>
-		    <li><a href="../Cliente/WebVerHistorial.aspx">Historial</a></li>
+		<li><a href="../Cliente/WebVerHistorial.aspx">Historial</a></li>
+        <li><a href="../Cliente/WebEditarCliente.aspx">Editar Datos</a></li>
         
     </ul>
 	<ul class="nav navbar-nav navbar-right">
